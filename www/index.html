@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 <head>
  <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -54,8 +54,8 @@
             } );
               },              
               timeout: 80000,    
-              error: function(){
-          alert("Erro ao fazer a requisição");
+              error: function(jqXHR, exception){
+          alert("Erro ao fazer a requisição"+jqXHR.status);
           }              
     });
   });

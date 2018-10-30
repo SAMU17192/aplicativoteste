@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+$(document).ready(function(){
         
   var kmg;
   var kmf;
@@ -39,14 +39,14 @@
                  $("#kminicial").val(json.KmAtual +' Km');                               
               },              
               timeout: 3000,    
-              error: function(){
-              alert("Erro ao fazer a requisição");
+              error:  error: function(jqXHR, exception){
+          alert("Erro ao fazer a requisição: "+jqXHR.status);
                 }              
               });          
               },              
               timeout: 3000,    
-              error: function(){
-          alert("Erro ao fazer a requisição");
+               error: function(jqXHR, exception){
+          alert("Erro ao fazer a requisição: "+jqXHR.status);
           }              
     });
          $('#texto').hide();
@@ -121,8 +121,8 @@
                                     
               },              
               timeout: 3000,    
-              error: function(){
-          alert("Erro ao fazer a requisição");
+               error: function(jqXHR, exception){
+          alert("Erro ao fazer a requisição: "+jqXHR.status);
           }
           });
       });

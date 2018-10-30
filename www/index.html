@@ -1,0 +1,99 @@
+﻿<html>
+<head>
+ <meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+<link rel="stylesheet" type="text/css" href="font/css/fontawesome-all.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/geturi.js"></script>
+<script src="select/js/classie.js"></script>
+<script src="select/js/selectFx.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="select/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="select/css/cs-select.css" />
+    <link rel="stylesheet" type="text/css" href="select/css/cs-skin-rotate.css" />
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <title></title>
+  <script type="text/javascript">
+  $(document).ready(function(){
+        
+        $('#btnselect').click(function(){
+     var valor = $('#select option:selected').val();
+     window.location.href = "inicio.html?id="+valor;
+      });
+      
+
+         $("#select").ready(function(){
+            $.ajax({
+              url: 'http://aplicativo.samuteles.com/webservice.php',
+              method: "POST",
+              data: {"tipo" : "listamb"},
+                success: function(data) {                                   
+                 //lendo objetos do JSON
+                 var json = $.parseJSON(data);                  
+                 $('#select').html("");
+                 //Para cada item encontrado, executar o loop
+                 var acumul = "";                
+            for (var i=0;i<json.length;i++)
+            {
+              
+              
+              acumul += '<option value="'+json[i].IdVeiculo+'"><i class="fas fa-ambulance"></i>'+json[i].NomeVeiculo +'</option>';
+          
+          
+            }
+
+
+            //Adicionando conteúdo acumulado no DIV Resultado
+            $("#select").append(acumul);
+           
+            [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {  
+            new SelectFx(el);
+            } );
+              },              
+              timeout: 80000,    
+              error: function(){
+          alert("Erro ao fazer a requisição");
+          }              
+    });
+  });
+});
+</script>
+</head>
+<body>
+<nav class=" nav justify-content-center navbar navbar-expand-lg navbar-light bg-danger">
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+  <a class="navbar-brand" style="color:white;padding-top: 0.6rem;"><i class="animated bounceInLeft slower fas fa-ambulance" style="font-size:1.5rem;"></i> <b>CMV-SAMU</b></a>
+</li>
+</ul>
+</nav>
+<br>
+<br>
+<br>
+<center>
+<div class="animated zoomInDown card" style="margin: 2rem 2rem 2rem 2rem;">
+
+  <div class="card-body">
+  
+    
+      <label class="select-label"><h1 class="text-danger" align="center"> <i class="fas fa-ambulance" style="color:#dc3545; "></i>Veículo:</h1> </label><br>
+      <select class="cs-select cs-skin-rotate" name="select" id="select">
+
+      </select>
+    </div><br>
+
+<br>
+
+    <button type="button" id="btnselect" class="btn btn-danger" align="center"><p class="">Selecionar</p></button>
+
+  </div>
+
+</center>
+
+
+    
+</body>
+</html>
